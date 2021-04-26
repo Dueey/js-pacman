@@ -11,7 +11,7 @@ class Pacman {
   }
 
   shouldMove() {
-    if (!this.dir) return false;
+    if (!this.dir) return;
 
     if (this.timer === this.speed) {
       this.timer = 0;
@@ -27,7 +27,7 @@ class Pacman {
       objectExists(nextMovePos, OBJECT_TYPE.WALL) ||
       objectExists(nextMovePos, OBJECT_TYPE.GHOSTLAIR)
     ) {
-      nextMovePos = this.post;
+      nextMovePos = this.pos;
     }
     return { nextMovePos, direction: this.dir };
   }
@@ -40,7 +40,7 @@ class Pacman {
   }
 
   setNewPos(nextMovePos) {
-    this.post = nextMovePos;
+    this.pos = nextMovePos;
   }
 
   handleKeyInput(e, objectExist) {
