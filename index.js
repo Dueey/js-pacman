@@ -17,6 +17,7 @@ import soundGhost from "./sounds/eat_ghost.wav";
 const gameGrid = document.querySelector("#game");
 const scoreTable = document.querySelector("#score");
 const startButton = document.querySelector("#start-button");
+const soundButton = document.querySelector("#sound-button");
 
 // Game Constants
 const POWER_PILL_TIME = 10000; // ms
@@ -29,6 +30,7 @@ let timer = null;
 let gameWin = false;
 let powerPillActive = false;
 let powerPillTimer = null;
+let soundOn = false;
 
 // Audio
 function playAudio(audio) {
@@ -37,7 +39,9 @@ function playAudio(audio) {
 }
 
 function gameOver(pacman, grid) {
-  playAudio(soundGameOver);
+  if (soundOn) {
+    playAudio(soundGameOver);
+  }
   document.removeEventListener("keydown", (e) =>
     pacman.handleKeyInput(e, gameBoard.objectExist)
   );
@@ -55,7 +59,9 @@ function checkCollision(pacman, ghosts) {
   if (collidedGhost) {
     // Pacman eats ghost
     if (pacman.powerPill) {
-      playAudio(soundGhost);
+      if (soundOn) {
+        playAudio(soundGhost);
+      }
       gameBoard.removeObject(collidedGhost.pos, [
         OBJECT_TYPE.GHOST,
         OBJECT_TYPE.SCARED,
@@ -80,14 +86,18 @@ function gameLoop(pacman, ghosts) {
 
   // Check if Pacman eats a dot
   if (gameBoard.objectExist(pacman.pos, OBJECT_TYPE.DOT)) {
-    playAudio(soundDot);
+    if (soundOn) {
+      playAudio(soundDot);
+    }
     gameBoard.removeObject(pacman.pos, [OBJECT_TYPE.DOT]);
     gameBoard.dotCount--;
     score += 10;
   }
   // Check if Pacman eats a powerpill
   if (gameBoard.objectExist(pacman.pos, OBJECT_TYPE.PILL)) {
-    playAudio(soundPill);
+    if (soundOn) {
+      playAudio(soundPill);
+    }
     gameBoard.removeObject(pacman.pos, [OBJECT_TYPE.PILL]);
 
     pacman.powerPill = true;
@@ -116,8 +126,21 @@ function gameLoop(pacman, ghosts) {
   scoreTable.innerHTML = score;
 }
 
+function toggleSound() {
+  soundOn = !soundOn;
+  if (!soundOn) {
+    document.getElementById("sound-button").innerHTML = "🔈 Sound Off";
+  }
+  if (soundOn) {
+    document.getElementById("sound-button").innerHTML = "🔊 Sound On";
+  }
+}
+
 function startGame() {
-  playAudio(soundGameStart);
+  if (soundOn) {
+    playAudio(soundGameStart);
+  }
+
   gameWin = false;
   powerPillActive = false;
   score = 0;
@@ -144,3 +167,5 @@ function startGame() {
 
 // Initialize Game
 startButton.addEventListener("click", startGame);
+// Toggle Sound
+soundButton.addEventListener("click", toggleSound);
