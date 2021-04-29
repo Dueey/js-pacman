@@ -48,6 +48,27 @@ class Pacman {
 
     if (e.keyCode >= 37 && e.keyCode <= 40) {
       dir = DIRECTIONS[e.key];
+      console.log(e.key);
+    } else {
+      return;
+    }
+
+    const nextMovePos = this.pos + dir.movement;
+    if (objectExist(nextMovePos, OBJECT_TYPE.WALL)) return;
+    this.dir = dir;
+  }
+
+  handleClick(e, objectExist) {
+    let dir;
+
+    if (e.target.id === "arrow-up") {
+      dir = DIRECTIONS["ArrowUp"];
+    } else if (e.target.id === "arrow-left") {
+      dir = DIRECTIONS["ArrowLeft"];
+    } else if (e.target.id === "arrow-down") {
+      dir = DIRECTIONS["ArrowDown"];
+    } else if (e.target.id === "arrow-right") {
+      dir = DIRECTIONS["ArrowRight"];
     } else {
       return;
     }

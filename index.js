@@ -18,6 +18,10 @@ const gameGrid = document.querySelector("#game");
 const scoreTable = document.querySelector("#score");
 const startButton = document.querySelector("#start-button");
 const soundButton = document.querySelector("#sound-button");
+const arrowUp = document.querySelector("#arrow-up");
+const arrowLeft = document.querySelector("#arrow-left");
+const arrowDown = document.querySelector("#arrow-down");
+const arrowRight = document.querySelector("#arrow-right");
 
 // Game Constants
 const POWER_PILL_TIME = 10000; // ms
@@ -153,6 +157,9 @@ function startGame() {
   gameBoard.addObject(287, [OBJECT_TYPE.PACMAN]);
   document.addEventListener("keydown", (e) =>
     pacman.handleKeyInput(e, gameBoard.objectExist)
+  );
+  document.addEventListener("click", (e) =>
+    pacman.handleClick(e, gameBoard.objectExist)
   );
 
   const ghosts = [
