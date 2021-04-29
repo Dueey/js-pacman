@@ -3,7 +3,7 @@
 }
 
 body {
-  background: url('/background.9e15dd99.jpg') no-repeat center center fixed;
+  background: url("/background.9e15dd99.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -53,6 +53,36 @@ body {
 
 #start-button {
   margin-top: 20px;
+  border-radius: 10px;
+  width: 120px;
+  height: 35px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: rgb(46, 43, 43);
+  color: #fff;
+  border: black solid;
+  cursor: pointer;
+}
+
+#start-button:hover {
+  background-color: rgb(27, 26, 26);
+}
+
+#sound-button {
+  margin-top: 20px;
+  padding-bottom: 3px;
+  padding-left: 2px;
+  height: 30px;
+  width: 110px;
+  background-color: rgb(46, 43, 43);
+  color: #fff;
+  border: black solid;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#sound-button:hover {
+  background-color: rgb(27, 26, 26);
 }
 
 .hide {
@@ -90,7 +120,7 @@ body {
 }
 
 .ghost::before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   width: 3px;
@@ -103,7 +133,7 @@ body {
 }
 
 .ghost::after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   width: 3px;
@@ -164,5 +194,6 @@ body {
     );
   }
 }
+
 
 /*# sourceMappingURL=/style.e308ff8e.css.map */
